@@ -2,13 +2,14 @@
 """
 This module instroduces a flask application.
 """
-from flask import Flask, request, url_for, render_template
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+from flask_login import LoginManager
 from models.database.users import Users, db
+from flask_argon2 import Argon2
 
 
 app = Flask(__name__)
+argon2 = Argon2(app)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['ASQLALCHEMY_DATABASE_URI'] = "sqlite://users.db"
 
@@ -26,20 +27,6 @@ def create_tables():
     request is handled.
     """
     db.create_all()
-
-    
-def create_user(username, password):
-    """
-    Function to create a new user.
-    Input:
-        username: The username of the individual to register
-        password: The password.
-    Store the new user in the database.
-    """
-    new_user = Users(username, password)
-    db.session.add(new_user)
-    db.session.commit()
-
 
 
 if __name__ == "__main__":
