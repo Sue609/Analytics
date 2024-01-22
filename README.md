@@ -7,3 +7,6 @@ Key features to be implemented include:
             - Password hashing
             - Account recovery
             - Session management
+
+    ## Database:
+            - Create user database t store login information.
