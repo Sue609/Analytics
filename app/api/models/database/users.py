@@ -22,3 +22,4 @@ class Users(db.Model, UserMixin):
     id = Column(Integer, primary_key=True)
     username = Column(String(50), unique=True, nullable=False)
     password = Column(String(100), nullable=False)
+    email = Column(db.String(120), unique=True, nullable=False)
