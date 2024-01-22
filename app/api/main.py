@@ -27,6 +27,19 @@ def create_tables():
     """
     db.create_all()
 
+    
+def create_user(username, password):
+    """
+    Function to create a new user.
+    Input:
+        username: The username of the individual to register
+        password: The password.
+    Store the new user in the database.
+    """
+    new_user = Users(username, password)
+    db.session.add(new_user)
+    db.session.commit()
+
 
 
 if __name__ == "__main__":
