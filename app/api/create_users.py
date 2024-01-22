@@ -15,6 +15,7 @@ def create_user(username, email, password):
         password: The password.
     Store the new user in the database.
     """
+    print("hey sue")
     hashed_pwd = argon2.generate_password_hash(password)
     new_user = Users(username=username, email=email, password=hashed_pwd)
     db.session.add(new_user)
@@ -35,7 +36,7 @@ def login():
         #if user is None:
             #raise IncorrectEmailError('Incorrect email!')
 
-        if argon2.check_password_hash(user.password, password):
+        if user is not None and argon2.check_password_hash(user.password, password):
             # if password is correct, log the user in
             login_user(user)
             return redirect(url_for('dashboard'))
@@ -44,5 +45,5 @@ def login():
         #except IncorrectEmailError as e:
             #return render_template("login.html", error="Incorrect email")
          
-    return render_template('login.html')
+    return render_template('index.html')
             

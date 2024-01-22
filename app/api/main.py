@@ -11,22 +11,28 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 argon2 = Argon2(app)
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://users.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
 db = SQLAlchemy(app)
 
-# Initialize the database after importing
-db.init_app(app)
+
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 
-@app.before_first_request
+setup_done = False
+
+
+@app.before_request
 def create_tables():
     """
     Function for creating database tables before the first
     request is handled.
     """
-    db.create_all()
+    global setup_done
+    
+    if not setup_done:
+        db.create_all()
+        setup_done = True
 
 
 if __name__ == "__main__":
