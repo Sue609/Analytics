@@ -18,26 +18,34 @@ login_manager.init_app(app)
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
     """
-    Defining a route that allows a user to login to their accounts.
+    Defining a route that allows users to sign up and create a new account.
+    Check if the email is already registered.
+    Hash tha password using argon2.
+    create new user and add them to the db.
     """
     if request.method == 'POST':
+        username = request.form['username']
         email = request.form['email']
         password = request.form['password']
         
         user = Users.query.filter_by(email=email).first()
+        if user:
+            error_message = "Email already registred. Please use a different email"
+            return render_template("index.html", error=error_message)
         
-        if user is not None and argon2.check_password_hash(user.password, password):
-            # if password is correct, log the user in
-            login_user(user)
-            return redirect(url_for('dashboard'))
+        hashed_pwd = argon2.generate_password_hash(password)
+        new_user = Users(username=username, email=email, password=hashed_pwd)
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
         
-        error_message = "Invalid email or password. Please try again."
-        return render_template("index.html", error=error_message)
+        return redirect(url_for('dashboard'))
         
     return render_template('index.html')
+
 
 if __name__ == "__main__":
     with app.app_context():
