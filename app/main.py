@@ -1,12 +1,12 @@
 # main.py
 from flask import Flask, render_template, redirect, url_for, request
-from auth import db, argon2, login_manager, Users, create_user_and_login
+from routes.auth import db, argon2, login_manager, Users, create_user_and_login
 from flask_login import login_user
 
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data_analytics.db"
 
 db.init_app(app)
 argon2.init_app(app)
@@ -31,9 +31,9 @@ def login():
             return redirect(url_for('dashboard'))
         
         error_message = "Invalid email or password. Please try again."
-        return render_template("/api/templates/index.html", error=error_message)
+        return render_template("index.html", error=error_message)
         
-    return render_template('/api/templates/index.html')
+    return render_template('index.html')
 
 if __name__ == "__main__":
     with app.app_context():
