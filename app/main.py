@@ -1,12 +1,16 @@
-# main.py
+#!/usr/bin/env python3
 from flask import Flask, render_template, redirect, url_for, request
 from routes.auth import db, argon2, login_manager, Users, create_user_and_login
 from flask_login import login_user
+from dotenv import load_dotenv
+import os
 
 
-
+load_dotenv()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data_analytics.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 db.init_app(app)
 argon2.init_app(app)
