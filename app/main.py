@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 from flask import Flask, render_template, redirect, url_for, request
-from routes.auth import db, argon2, login_manager, Users, create_user_and_login
-from flask_login import login_user
+from routes.auth import db, argon2, login_manager, Users
+from flask_login import login_user, current_user, login_required
 from dotenv import load_dotenv
 import os
 
 
 load_dotenv()
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'data_analytic'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -38,13 +39,33 @@ def signup():
         
         hashed_pwd = argon2.generate_password_hash(password)
         new_user = Users(username=username, email=email, password=hashed_pwd)
-        db.session.add(new_user)
-        db.session.commit()
-        login_user(new_user)
-        
-        return redirect(url_for('dashboard'))
-        
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user)
+            return redirect(url_for('dashboard'))
+        except IntegrityError:
+            db.session.rollback()
+            error_message = "An error occured while creating the user. Please try again"
+            return render_template("index.html", error=error_message)
+
     return render_template('index.html')
+
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    """
+    Route for displaying user-specific dashboard information.
+    """
+    user = current_user
+    
+    additional_data = {
+        'key1': 'value1',
+        'key2': 'value2',
+    }
+    
+    return render_template('dashboard.html', user=user, additional_data=additional_data)
 
 
 if __name__ == "__main__":
