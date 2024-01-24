@@ -3,13 +3,13 @@ from flask import Flask, render_template, redirect, url_for, request
 from routes.auth import db, argon2, login_manager, Users
 from flask_login import login_user, current_user, login_required
 from dotenv import load_dotenv
-from routes.sign_up import signup
 import os
-from routes.sign_up import signup_app
+from routes.signup import signup_app
 
 
 load_dotenv()
 app = Flask(__name__)
+app.register_blueprint(signup_app)
 app.config['SECRET_KEY'] = 'data_analytic'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -19,7 +19,6 @@ db.init_app(app)
 argon2.init_app(app)
 login_manager.init_app(app)
 
-app.register_blueprint(signup_app, url_prefix='/signup')
 
 @app.route('/')
 def home():
