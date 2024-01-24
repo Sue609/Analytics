@@ -2,15 +2,16 @@
 """
 This module introduces flask signup route
 """
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, Blueprint
 from routes.auth import db, argon2, login_manager, Users
 from flask_login import login_user, current_user, login_required
 from dotenv import load_dotenv
 import os
-from main import app
+from sqlalchemy.exc import IntegrityError
 
+signup_app = Blueprint('signup', __name__)
 
-@app.route('/signup', methods=['GET', 'POST'])
+@signup_app.route('/signup', methods=['GET', 'POST'])
 def signup():
     """
     Defining a route that allows users to sign up and create a new account.
