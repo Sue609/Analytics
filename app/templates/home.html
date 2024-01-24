@@ -54,7 +54,18 @@
         <br>
         <input type="file" name="file" accept=".csv" required>
         <br>
-        <input type="submit" value="Upload and Analyze">
+        <input type="submit" value="Upload">
+    </form>
+    <form action='Analyze', method='post'>
+      <br>
+        <label for="analysis_method">Choose analysis method:</label>
+      <select name="analysis_method">
+         <option value="describe">Descriptive Statistics</option>
+         <option value="custom">Custom Analysis</option>
+      </select>
+      <br>
+      <input type="submit" value="Analyze">  
+
     </form>
 </body>
 </html>
