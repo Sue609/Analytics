@@ -5,10 +5,11 @@ This module introduces flask signup route
 from flask import Flask, render_template, redirect, url_for, request, Blueprint
 from routes.auth import db, argon2, Users
 from flask_login import login_user
-import os
 from sqlalchemy.exc import IntegrityError
 
+
 signup_app = Blueprint('signup', __name__, template_folder='templates')
+
 
 @signup_app.route('/signup', methods=['GET', 'POST'])
 def signup():
