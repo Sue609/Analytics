@@ -5,11 +5,16 @@ from flask_login import login_user, current_user, login_required
 from dotenv import load_dotenv
 import os
 from routes.signup import signup_app
+from routes.upload import upload_app
 
 
 load_dotenv()
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+
 app.register_blueprint(signup_app)
+app.register_blueprint(upload_app)
+
 app.config['SECRET_KEY'] = 'data_analytic'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
