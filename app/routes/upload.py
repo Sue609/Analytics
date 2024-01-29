@@ -5,6 +5,7 @@ This module introduces the upload route for uploading files and CSVs
 from flask import Flask, Blueprint, render_template, request, redirect, current_app
 import pandas as pd
 import os
+from werkzeug.utils import secure_filename
 
 
 UPLOAD_FOLDER = 'uploads'
@@ -39,11 +40,13 @@ def upload():
         # save the uploaded file
         upload_folder = current_app.config['UPLOAD_FOLDER']
         os.makedirs(upload_folder, exist_ok=True)
-
-        filename = os.path.join(upload_folder, file.filename)
-        file.save(filename)
         
-        df = pd.read_csv(filename, encoding='latin1')
+        filename = secure_filename('file.csv')
+
+        filepath = os.path.join(upload_folder, filename)
+        file.save(filepath)
+        
+        df = pd.read_csv(filepath, encoding="latin1")
         
         print(df.head())
         
