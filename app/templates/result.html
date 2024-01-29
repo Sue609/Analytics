@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result</title>
+</head>
+<body>
+    <h1>Analysis Result</h1>
+    
+    <!-- Display analysis result -->
+    <div>
+        {% if result %}
+            <p>{{ result }}</p>
+        {% else %}
+            <p>No result available</p>
+        {% endif %}
+    </div>
+    
+    <!-- Display generated visualizations -->
+    <div>
+        <h2>Generated Visualizations</h2>
+        <div>
+            <h3>Custom Analysis Plot</h3>
+            <img src="{{ url_for('static', filename='custom_analysis_plot.png') }}" alt="Custom Analysis Plot">
+        </div>
+        <div>
+            <h3>Describe Analysis Plot</h3>
+            <img src="{{ url_for('static', filename='describe_analysis_plot.png') }}" alt="Describe Analysis Plot">
+        </div>
+    </div>
+</body>
+</html>

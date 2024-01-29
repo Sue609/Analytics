@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import os
 from routes.signup import signup_app
 from routes.upload import upload_app
+from routes.analyze import analyze_app
 
 
 load_dotenv()
@@ -14,6 +15,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 app.register_blueprint(signup_app)
 app.register_blueprint(upload_app)
+app.register_blueprint(analyze_app)
 
 app.config['SECRET_KEY'] = 'data_analytic'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')

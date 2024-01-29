@@ -2,13 +2,13 @@
 """
 This module introduces the analyze route.
 """
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, Blueprint
 import pandas as df
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-analyze = Blueprint('analyze', __name__, template_folder='templates')
+analyze_app = Blueprint('analyze', __name__, template_folder='templates')
 
 
 def custom_analysis(df, parameters):
@@ -33,7 +33,7 @@ def custom_analysis(df, parameters):
     return result
 
 
-@analyze.route('/analyze', methods=['POST'])
+@analyze_app.route('/analyze', methods=['POST', 'GET'])
 def analyze():
     analysis_method = request.form.get('analysis_method')
     
