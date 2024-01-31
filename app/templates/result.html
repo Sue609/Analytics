@@ -10,10 +10,17 @@
     
     <!-- Display analysis result -->
     <div>
-        {% if result %}
+        {% if result is string %}
             <p>{{ result }}</p>
+        {% elif result is defined %}
+            {% if result.empty %}
+                <p>No data available for analysis.</p>
+            {% else %}
+                <!-- Display DataFrame contents -->
+                {{ result.to_html()|safe }}
+            {% endif %}
         {% else %}
-            <p>No result available</p>
+            <p>Invalid result type.</p>
         {% endif %}
     </div>
     
@@ -31,3 +38,5 @@
     </div>
 </body>
 </html>
+
+

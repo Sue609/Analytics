@@ -46,10 +46,11 @@ def upload():
         filepath = os.path.join(upload_folder, filename)
         file.save(filepath)
         
-        df = pd.read_csv(filepath, encoding="latin1")
-        
-        print(df.head())
-        
-        return 'File uploaded successfully'
+        try:
+            df = pd.read_csv(filepath, encoding="latin-1")
+            print(df.head())
+            
+        except Exception as e:
+            return f'Error reading CSV file: {e}'
     
     return 'Invalid file format. Only CSV files are allowed.'
