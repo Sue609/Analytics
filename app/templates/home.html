@@ -57,17 +57,19 @@
         <input type="submit" value="Upload">
     </form>
     
-    <form action="/analyze" method="post">
-      <br>
-        <label for="analysis_method">Choose analysis method:</label>
-      <select name="analysis_method">
-         <option value="describe">Descriptive Statistics</option>
-         <option value="custom">Custom Analysis</option>
-      </select>
-      <br>
-      <input type="submit" value="Analyze">  
+    <h1>{% block heading %}{% endblock %}</h1>
 
+    <form action="/analyze" method="post">
+        <label for="analysis_method">Select Analysis Method:</label>
+        <select name="analysis_method" id="analysis_method">
+            <option value="descriptive">Descriptive Analysis</option>
+            <option value="custom">Custom Analysis</option>
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
     </form>
+
+    {% block content %}{% endblock %}
 </body>
 </html>
 

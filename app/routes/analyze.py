@@ -6,59 +6,139 @@ from flask import Blueprint, request, render_template
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import statsmodels.api as sm
 
 analyze_app = Blueprint('analyze', __name__, template_folder='templates')
 
-def custom_analysis(df, parameters):
+# Function for descriptive analysis methods
+def descriptive_analysis(df):
     """
-    Function to implement the custom analysis logic
+    Perform descriptive analysis methods on the input DataFrame.
+
+    Parameters:
+        df (pandas.DataFrame): The DataFrame containing the data for analysis.
+
+    Returns:
+        tuple: A tuple containing the following elements:
+            - list: A list of file paths to the generated histogram plots.
+            - list: A list of file paths to the generated box plot plots.
+            - pandas.DataFrame: Summary statistics of the input DataFrame.
     """
-    group_by_column = parameters.get('group_by_column')
-    
-    if group_by_column:
-        result = df.groupby(group_by_column).agg({'value': 'sum'})
-        
-        # Generate visualization
-        plt.figure(figsize=(10, 6))
-        sns.barplot(x=result.index, y='value', data=result)
-        plt.title('Custom Analysis Result')
-        plt.xlabel(group_by_column)
-        plt.ylabel('Sum of Values')
-        plt.xticks(rotation=45)
+    histograms = []
+    box_plots = []
+    summary_statistics = df.describe()
+
+    for column in df.select_dtypes(include='number').columns:
+        plt.figure(figsize=(12, 8))
+        plt.hist(df[column], bins=10)
+        plt.title(f'Histogram of {column}')
+        plt.xlabel(column)
+        plt.ylabel('Frequency')
+        plt.grid(True)
         plt.tight_layout()
-        
-        plt.savefig('static/custom_analysis_plot.png')
-        # Close plot to free resources
+        histogram_path = f'static/histogram_{column}.png'
+        plt.savefig(histogram_path, dpi=300)
         plt.close()
-        
-        return result
-    else:
-        return "Group by column not specified" 
+        histograms.append(histogram_path)
+    
+    for column in df.select_dtypes(include='number').columns:
+        plt.figure(figsize=(12, 8))
+        sns.boxplot(x=df[column])
+        plt.title(f'Box Plot of {column}')
+        plt.xlabel(column)
+        plt.grid(True)
+        plt.tight_layout()
+        box_plot_path = f'static/box_plot_{column}.png'
+        plt.savefig(box_plot_path, dpi=300)
+        plt.close()
+        box_plots.append(box_plot_path)
+    
+    return histograms, box_plots, summary_statistics
+
+
+def custom_analysis(df):
+    """
+    Perform custom analysis methods on the input DataFrame.
+
+    Parameters:
+        df (pandas.DataFrame): The DataFrame containing the data for analysis.
+
+    Returns:
+        tuple: A tuple containing the file paths of the generated images.
+    """
+    if 'Date' not in df.columns:
+        raise ValueError("Column 'Date' not found in the DataFrame.")
+
+    result = {}
+
+    time_series_data = df.set_index('Date')
+    time_series_data.index = pd.to_datetime(time_series_data.index)  # Convert index to datetime
+
+    plt.figure(figsize=(12, 8))
+    time_series_data['Value'].plot()
+    plt.title('Time Series Data')
+    plt.xlabel('Date')
+    plt.ylabel('Value')
+    plt.grid(True)
+    plt.tight_layout()
+    time_series_plot_path = 'static/time_series_plot.png'
+    plt.savefig(time_series_plot_path, dpi=300)
+    plt.close()
+
+    decomposition = sm.tsa.seasonal_decompose(time_series_data['Value'], model='additive')
+    trend = decomposition.trend
+    seasonal = decomposition.seasonal
+    residual = decomposition.resid
+
+    plt.figure(figsize=(14, 10), dpi=100)
+    plt.subplot(411)
+    plt.plot(time_series_data['Value'], label='Original')
+    plt.legend(loc='best')
+    plt.subplot(412)
+    plt.plot(trend, label='Trend')
+    plt.legend(loc='best')
+    plt.subplot(413)
+    plt.plot(seasonal, label='Seasonal')
+    plt.legend(loc='best')
+    plt.subplot(414)
+    plt.plot(residual, label='Residual')
+    plt.legend(loc='best')
+    plt.tight_layout()
+    time_series_decomposition_path = 'static/time_series_decomposition.png'
+    plt.savefig(time_series_decomposition_path, dpi=300)
+    plt.close()
+
+    return time_series_plot_path, time_series_decomposition_path
+
+
 
 @analyze_app.route('/analyze', methods=['POST', 'GET'])
 def analyze():
-    # Load the DataFrame from a CSV file
-    df = pd.read_csv('uploads/file.csv')
-    
-    analysis_method = request.form.get('analysis_method')
-    
-    if analysis_method == 'describe':
-        result = df.describe()
-        
-        # Generate visualization
-        plt.figure(figsize=(10, 6))
-        df.hist()
-        plt.suptitle('Histogram of data')
-        plt.tight_layout()
-        plt.savefig('static/describe_analysis_plot.png')
-        plt.close()
-        
-    elif analysis_method == 'custom':
-        # Implement custom analysis based on user input
-        # You can retrieve additional parameters from the form
-        result = custom_analysis(df, request.form)
-    else:
-        result = "Invalid analysis method"
+    """
+    Function for loading the DataFrame from a CSV file and performing analysis.
+    """
+    # Check if the request method is POST
+    if request.method == 'POST':
+        df = pd.read_csv('uploads/file.csv', encoding='latin-1')
 
-    return render_template('result.html', result=result)
+        analysis_method = request.form.get('analysis_method')
+
+        if analysis_method == 'descriptive':
+            histograms, box_plots, summary_statistics = descriptive_analysis(df)
+            return render_template('descriptive_analysis.html', histograms=histograms, box_plots=box_plots, summary_statistics=summary_statistics)
+        
+        elif analysis_method == 'custom':
+            try:
+                time_series_plot_path, time_series_decomposition_path = custom_analysis(df)
+                return render_template('custom_analysis.html', time_series_plot=time_series_plot_path, time_series_decomposition=time_series_decomposition_path)
+            except ValueError as e:
+                # Handle the case where 'Date' column is missing in DataFrame
+                return render_template('custom_analysis_error.html', error_message=str(e))
+
+        else:
+            return render_template('invalid_analysis_method.html')
+    
+    else:
+        # Handle the case where the request method is not POST
+        return "Invalid request method"
+

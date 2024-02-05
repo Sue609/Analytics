@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/descriptive.css') }}">
 </head>
 <body>
     <h1>Analysis Result</h1>
-    
-    <!-- Display analysis result -->
     <div>
         {% if result is string %}
             <p>{{ result }}</p>
@@ -16,27 +15,23 @@
             {% if result.empty %}
                 <p>No data available for analysis.</p>
             {% else %}
-                <!-- Display DataFrame contents -->
                 {{ result.to_html()|safe }}
             {% endif %}
         {% else %}
             <p>Invalid result type.</p>
         {% endif %}
     </div>
-    
-    <!-- Display generated visualizations -->
+
     <div>
         <h2>Generated Visualizations</h2>
-        <div>
+        <div class="image-container">
             <h3>Custom Analysis Plot</h3>
-            <img src="{{ url_for('static', filename='custom_analysis_plot.png') }}" alt="Custom Analysis Plot">
+            <img src="{{ url_for('static', filename='box_plot_level.png') }}" alt="Custom Analysis Plot">
         </div>
-        <div>
+        <div class="image-container">
             <h3>Describe Analysis Plot</h3>
-            <img src="{{ url_for('static', filename='describe_analysis_plot.png') }}" alt="Describe Analysis Plot">
+            <img src="{{ url_for('static', filename='histogram_level.png') }}" alt="Describe Analysis Plot">
         </div>
     </div>
 </body>
 </html>
-
-
