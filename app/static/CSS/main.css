@@ -1,0 +1,26 @@
+#button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5777e7;
+    color: white;
+    padding: 10px 20px;
+}
+
+#button-container h2 {
+    margin: 0;
+}
+
+#button-container > div {
+    display: flex;
+}
+
+#button-container p {
+    font-size: large;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#button-container p:hover {
+    text-decoration: underline;
+}

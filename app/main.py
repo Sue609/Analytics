@@ -32,7 +32,7 @@ def home():
     """
     Route for the home page.
     """
-    return render_template('home.html')
+    return render_template('main.html')
 
 
 @app.route('/dashboard')
