@@ -1,3 +1,19 @@
+.analytic-container {
+    max-width: 100%;
+    width: auto;
+    margin: 0 auto;
+    
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.container {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
 #button-container {
     display: flex;
     justify-content: space-between;
