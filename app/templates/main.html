@@ -18,6 +18,7 @@
                     <p>Get Started</p>
                 </div>    
             </div>
+
             <h2>Unlock Powerful Insights with Data Analytics</h2>
             <p>Our website analytics platform empowers you to gain valuable insights into your website's performance, user behavior, and more. Whether you're a business owner, marketer, or website developer, our intuitive tools and comprehensive analytics dashboards provide the data you need to make informed decisions and optimize your online presence.</p>
             <ul>
@@ -26,6 +27,30 @@
                 <li>Identify popular content and areas for improvement</li>
                 <li>Generate custom reports and actionable recommendations</li>
             </ul>
+           
+            <div id="analysis">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <label for="file">Choose a CSV file:</label>
+                    <br>
+                    <input type="file" name="file" accept=".csv" required>
+                    <br>
+                    <input type="submit" value="Upload">
+                </form>
+                
+                <h1>{% block heading %}{% endblock %}</h1>
+            
+                <form action="/analyze" method="post">
+                    <label for="analysis_method">Select Analysis Method:</label>
+                    <select name="analysis_method" id="analysis_method">
+                        <option value="descriptive">Descriptive Analysis</option>
+                        <option value="custom">Custom Analysis</option>
+                    </select>
+                    <br><br>
+                    <button type="submit">Submit</button>
+                </form>
+            
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </body>
 </html>
