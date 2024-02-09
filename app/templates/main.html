@@ -31,29 +31,31 @@
                     </ul>
                 </div>                
             </div>
-
-            <div id="analysis">
-                <form action="/upload" method="post" enctype="multipart/form-data">
-                    <label for="file">Choose a CSV file:</label>
-                    <br>
-                    <input type="file" name="file" accept=".csv" required>
-                    <br>
-                    <input type="submit" value="Upload">
-                </form>
+            <div id="analysis-container">
+                <div id="analysis">
+                    <h3>Data Growth with valuable insights using intuitive tools<h3>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <label for="file">Choose a CSV file:</label>
+                        <br>
+                        <input type="file" name="file" accept=".csv" required>
+                        <br>
+                        <input type="submit" value="Upload">
+                    </form>
+                    
+                    <h1>{% block heading %}{% endblock %}</h1>
                 
-                <h1>{% block heading %}{% endblock %}</h1>
-            
-                <form action="/analyze" method="post">
-                    <label for="analysis_method">Select Analysis Method:</label>
-                    <select name="analysis_method" id="analysis_method">
-                        <option value="descriptive">Descriptive Analysis</option>
-                        <option value="custom">Custom Analysis</option>
-                    </select>
-                    <br><br>
-                    <button type="submit">Submit</button>
-                </form>
-            
-                {% block content %}{% endblock %}
+                    <form action="/analyze" method="post">
+                        <label for="analysis_method">Select Analysis Method:</label>
+                        <select name="analysis_method" id="analysis_method">
+                            <option value="descriptive">Descriptive Analysis</option>
+                            <option value="custom">Custom Analysis</option>
+                        </select>
+                        <br><br>
+                        <button type="submit">Submit</button>
+                    </form>
+                
+                    {% block content %}{% endblock %}
+                </div>
             </div>
         </div>
     </body>
