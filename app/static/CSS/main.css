@@ -2,6 +2,7 @@
     max-width: 100%;
     width: auto;
     margin: 0 auto;
+    margin-bottom: 0;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -17,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #5777e7;
+    background-color: #455386;
     color: white;
     padding: 10px 20px;
 }
@@ -40,12 +41,20 @@
     text-decoration: underline;
 }
 
-#info-container {
+#body-container {
+    margin-top: 0;
     max-width: 100%;
-    max-height: 100%;
-    background-image: url('landing-page.jpg');
+    max-height: 80%;
+    background-image: url('landing.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     height: 100%;
+    font-size: large;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+
