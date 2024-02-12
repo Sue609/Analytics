@@ -8,9 +8,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
 
+
 analyze_app = Blueprint('analyze', __name__, template_folder='templates')
 
-# Function for descriptive analysis methods
+
 def descriptive_analysis(df):
     """
     Perform descriptive analysis methods on the input DataFrame.
@@ -111,6 +112,27 @@ def custom_analysis(df):
     return time_series_plot_path, time_series_decomposition_path
 
 
+def correlation_analysis(df):
+    """
+    Function for calculating the correlation matrix.
+    Visualize the correlation matrix as a heatmap.
+    Save the heatmap plot.
+    """
+    numeric_df = df.select_dtypes(include='number')
+
+    corr_matrix = numeric_df.corr()
+
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+    plt.title('Correlation Matrix')
+    plt.tight_layout()
+
+    correlation_plot_path = 'static/correlation_heatmap.png'
+    plt.savefig(correlation_plot_path)
+    plt.close()
+    
+    return correlation_plot_path
+
+
 
 @analyze_app.route('/analyze', methods=['POST', 'GET'])
 def analyze():
@@ -121,11 +143,9 @@ def analyze():
     if request.method == 'POST':
         df = pd.read_csv('uploads/file.csv', encoding='latin-1')
 
-        # Data Validation and Cleaning
         if df.isnull().values.any():
             df = df.dropna()
 
-        # Enforce data types if necessary
         if 'Date' in df.columns:
             df['Date'] = pd.to_datetime(df['Date'])
 
@@ -141,6 +161,10 @@ def analyze():
                 return render_template('custom_analysis.html', time_series_plot=time_series_plot_path, time_series_decomposition=time_series_decomposition_path)
             except ValueError as e:
                 return render_template('custom_analysis_error.html', error_message=str(e))
+
+        elif analysis_method == 'correlation':
+            correlation_plot_path = correlation_analysis(df)
+            return render_template('correlation_analysis.html', correlation_plot=correlation_plot_path)
 
         else:
             return render_template('invalid_analysis_method.html')
