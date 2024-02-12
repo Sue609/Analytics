@@ -24,5 +24,9 @@ Types of analysis conducted:
                         Time series analysis helps organizations understand the underlying causes of trends or systemic patterns over time.
                         It is used for non-stationary data—things that are constantly fluctuating over time or are affected by time. Industries like finance, retail, and economics frequently use time series analysis because currency and sales are always changing.
 
-        3. Correlation analysis:
+        3. Correlation heat map analysis:
+                # correlation matrix heatmap you visualize the correlation coefficients between variables as a matrix of colors, where each cell represents the correlation coefficient between two variables.
+                This visualization helps identify patterns and relationships between variables, with higher correlation coefficients typically represented by warmer colors (e.g., red) and lower correlation coefficients by cooler colors (e.g., blue).
+
+        4. Correlation Scatter plot:
                 # This is a statistical method used to measure the strength of the linear relationship between two variablesand compute their association. It calculates the level of change in one variable due to the change in the other. Correlation between two variables can be either a positive correlation, a negative correlation, or no correlation.

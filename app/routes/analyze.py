@@ -133,6 +133,40 @@ def correlation_analysis(df):
     return correlation_plot_path
 
 
+def univariate_analysis(df):
+    """
+    Function for calculating the correlation matrix and visualizing it as a heatmap,
+    and also creating a line graph to visualize the relationship between two specific variables.
+    Save the heatmap plot and line graph.
+    """
+    numeric_df = df.select_dtypes(include='number')
+
+    corr_matrix = numeric_df.corr()
+
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+    plt.title('Correlation Matrix')
+    plt.tight_layout()
+
+    correlation_plot_path = 'static/correlation_heatmap.png'
+    plt.savefig(correlation_plot_path)
+    plt.close()
+
+    variable1 = 'Column1'
+    variable2 = 'Column2'
+
+    plt.figure()
+    plt.plot(df[variable1], df[variable2], marker='o', linestyle='-')
+    plt.title(f'Line Graph of {variable1} vs {variable2}')
+    plt.xlabel(variable1)
+    plt.ylabel(variable2)
+    plt.tight_layout()
+
+    line_graph_path = 'static/line_graph.png'
+    plt.savefig(line_graph_path)
+    plt.close()
+
+    return correlation_plot_path, line_graph_path
+
 
 @analyze_app.route('/analyze', methods=['POST', 'GET'])
 def analyze():
