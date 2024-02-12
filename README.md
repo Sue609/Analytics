@@ -30,3 +30,8 @@ Types of analysis conducted:
 
         4. Correlation Scatter plot:
                 # This is a statistical method used to measure the strength of the linear relationship between two variablesand compute their association. It calculates the level of change in one variable due to the change in the other. Correlation between two variables can be either a positive correlation, a negative correlation, or no correlation.
+
+        5.  Univariate Analysis:
+                # It focuses on understanding the behavior and trend of a single variable (the "Value" variable) over time.
+                When a line graph is used to visualize the trend of a single variable over time or across different categories, it is considered univariate analysis.
+                In this context, the line graph helps in understanding the behavior and trends of a single variable.
