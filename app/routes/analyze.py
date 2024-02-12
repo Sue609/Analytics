@@ -151,8 +151,8 @@ def univariate_analysis(df):
     plt.savefig(correlation_plot_path)
     plt.close()
 
-    variable1 = 'Column1'
-    variable2 = 'Column2'
+    variable1 = 'Age'
+    variable2 = 'Income'
 
     plt.figure()
     plt.plot(df[variable1], df[variable2], marker='o', linestyle='-')
@@ -199,6 +199,10 @@ def analyze():
         elif analysis_method == 'correlation':
             correlation_plot_path = correlation_analysis(df)
             return render_template('correlation_analysis.html', correlation_plot=correlation_plot_path)
+        
+        elif analysis_method == 'univariate':
+            correlation_plot_path, line_graph_path = univariate_analysis(df)
+            return render_template('univariate_analysis.html', correlation_plot=correlation_plot_path, line_graph=line_graph_path)
 
         else:
             return render_template('invalid_analysis_method.html')

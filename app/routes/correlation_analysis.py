@@ -6,6 +6,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
 def correlation_analysis(df):
     """
     Function for calculating the correlation matrix.
