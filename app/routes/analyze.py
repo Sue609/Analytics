@@ -115,11 +115,19 @@ def custom_analysis(df):
 @analyze_app.route('/analyze', methods=['POST', 'GET'])
 def analyze():
     """
-    Function for loading the DataFrame from a CSV file and performing analysis.
+    Function for loading the DataFrame from a CSV file,
+    performing data validation and cleaning, and then performing analysis.
     """
-    # Check if the request method is POST
     if request.method == 'POST':
         df = pd.read_csv('uploads/file.csv', encoding='latin-1')
+
+        # Data Validation and Cleaning
+        if df.isnull().values.any():
+            df = df.dropna()
+
+        # Enforce data types if necessary
+        if 'Date' in df.columns:
+            df['Date'] = pd.to_datetime(df['Date'])
 
         analysis_method = request.form.get('analysis_method')
 
@@ -132,13 +140,10 @@ def analyze():
                 time_series_plot_path, time_series_decomposition_path = custom_analysis(df)
                 return render_template('custom_analysis.html', time_series_plot=time_series_plot_path, time_series_decomposition=time_series_decomposition_path)
             except ValueError as e:
-                # Handle the case where 'Date' column is missing in DataFrame
                 return render_template('custom_analysis_error.html', error_message=str(e))
 
         else:
             return render_template('invalid_analysis_method.html')
     
     else:
-        # Handle the case where the request method is not POST
         return "Invalid request method"
-
