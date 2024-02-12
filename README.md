@@ -22,4 +22,7 @@ Types of analysis conducted:
                         This is a specific way of analyzing a sequence of data points collected over an interval of time.
                         Data points are recorded at consistent intervals over a set period of time rather than just recording the data points intermittently or randomly.
                         Time series analysis helps organizations understand the underlying causes of trends or systemic patterns over time.
-                        It is used for non-stationary data—things that are constantly fluctuating over time or are affected by time. Industries like finance, retail, and economics frequently use time series analysis because currency and sales are always changing. 
+                        It is used for non-stationary data—things that are constantly fluctuating over time or are affected by time. Industries like finance, retail, and economics frequently use time series analysis because currency and sales are always changing.
+
+        3. Correlation analysis:
+                # This is a statistical method used to measure the strength of the linear relationship between two variablesand compute their association. It calculates the level of change in one variable due to the change in the other. Correlation between two variables can be either a positive correlation, a negative correlation, or no correlation.
