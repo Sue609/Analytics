@@ -11,7 +11,6 @@ import statsmodels.api as sm
 
 analyze_app = Blueprint('analyze', __name__, template_folder='templates')
 
-
 def descriptive_analysis(df):
     """
     Perform descriptive analysis methods on the input DataFrame.
