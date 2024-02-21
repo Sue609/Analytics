@@ -37,7 +37,7 @@ def descriptive_analysis(df):
         plt.grid(True)
         plt.tight_layout()
         histogram_path = f'static/histogram_{column}.png'
-        plt.savefig(histogram_path, dpi=300)
+        plt.savefig(histogram_path, dpi=100)
         plt.close()
         histograms.append(histogram_path)
     
@@ -49,7 +49,7 @@ def descriptive_analysis(df):
         plt.grid(True)
         plt.tight_layout()
         box_plot_path = f'static/box_plot_{column}.png'
-        plt.savefig(box_plot_path, dpi=300)
+        plt.savefig(box_plot_path, dpi=100)
         plt.close()
         box_plots.append(box_plot_path)
     

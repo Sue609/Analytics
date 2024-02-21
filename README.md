@@ -35,3 +35,6 @@ Types of analysis conducted:
                 # It focuses on understanding the behavior and trend of a single variable (the "Value" variable) over time.
                 When a line graph is used to visualize the trend of a single variable over time or across different categories, it is considered univariate analysis.
                 In this context, the line graph helps in understanding the behavior and trends of a single variable.
+
+Creating Matplotlin Histogram:
+        1. Create a bin of the ranges, then distribute the whole range of the values into a series ot intervals, and count the values that fall into each interval. Bins are identified as consecutive, non-overlapping intervals of variables.

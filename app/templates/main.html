@@ -50,14 +50,43 @@
                         <form action="/analyze" method="post">
                             <label for="analysis_method">Select Analysis Method:</label>
                             <select name="analysis_method" id="analysis_method">
+                                <option value="none">Select Analysis Method</option>
                                 <option value="descriptive">Descriptive Analysis</option>
                                 <option value="custom">Custom Analysis</option>
                                 <option value="correlation">Correlation Heat Map Analysis</option>
                                 <option value="univariate">Univariate Analysis</option>
                             </select>
                             <br><br>
+                        
+                            <!-- Nested dropdown for Descriptive Analysis options -->
+                            <div id="descriptive_options" style="display: none;">
+                                <label for="descriptive_option">Select Descriptive Option:</label>
+                                <select name="descriptive_option" id="descriptive_option">
+                                    <option value="none">Select Descriptive Option</option>
+                                    <option value="histogram">Histogram</option>
+                                    <option value="pie_chart">Pie Chart</option>
+                                </select>
+                                <br><br>
+                        
+                                <!-- Nested dropdown for Histogram options -->
+                                <div id="histogram_options" style="display: none;">
+                                    <label for="histogram_type">Select Histogram Type:</label>
+                                    <select name="histogram_type" id="histogram_type">
+                                        <option value="none">Select Histogram Type</option>
+                                        <option value="basic">Basic Histogram</option>
+                                        <option value="waterline">Waterline Histogram</option>
+                                        <option value="stacked">Stacked Histogram</option>
+                                    </select>
+                                    <br><br>
+                                </div>
+                            </div>
+                        
                             <button type="submit">Submit</button>
-                        </form>
+                        
+                            <script>
+                                
+                            </script>
+                        </form>                        
                     
                         {% block content %}{% endblock %}
                     </div>
