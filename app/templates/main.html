@@ -137,6 +137,18 @@
                                     } else {
                                         document.getElementById("summary_statistics_options").style.display = "none";
                                     }
+                            
+                                    // Display nested options for Data Visualization if selected
+                                    if (analysisMethod === "descriptive") {
+                                        var descriptiveOption = document.getElementById("descriptive_option").value;
+                                        if (descriptiveOption === "data_visualization") {
+                                            document.getElementById("data_visualization_options").style.display = "block";
+                                        } else {
+                                            document.getElementById("data_visualization_options").style.display = "none";
+                                        }
+                                    } else {
+                                        document.getElementById("data_visualization_options").style.display = "none";
+                                    }
                                 });
                             
                                 // Show/hide nested options for Summary Statistics based on descriptive option selected
@@ -147,8 +159,16 @@
                                     } else {
                                         document.getElementById("summary_statistics_options").style.display = "none";
                                     }
+                            
+                                    // Show/hide nested options for Data Visualization based on descriptive option selected
+                                    if (descriptiveOption === "data_visualization") {
+                                        document.getElementById("data_visualization_options").style.display = "block";
+                                    } else {
+                                        document.getElementById("data_visualization_options").style.display = "none";
+                                    }
                                 });
                             </script>
+                            
                             
                             
                         </form>

@@ -12,6 +12,7 @@ import statsmodels.api as sm
 analyze_app = Blueprint('analyze', __name__, template_folder='templates')
 import pandas as pd
 
+
 def summary_statistics(df, summary_option):
     """
     Function to calculate summary statistics based on the selected option.
@@ -38,6 +39,29 @@ def summary_statistics(df, summary_option):
 
 
 
+def create_histogram_with_watermark(year_data, column_data, column_name):
+    """
+    Function to create a histogram with watermark for a specified column in a DataFrame.
+
+    Parameters:
+    year_data (numpy.ndarray): The data for the 'Year' column.
+    column_data (numpy.ndarray): The data for the column to visualize.
+    column_name (str): The name of the column to visualize.
+
+    Returns:
+    None
+    """
+    plt.figure(figsize=(10, 6))
+    plt.hist2d(year_data, column_data, bins=(20, 20), cmap='Blues')
+    plt.title(f'Histogram of Year vs {column_name}')
+    plt.xlabel('Year')
+    plt.ylabel(column_name)
+    plt.colorbar(label='Frequency')
+    plt.grid(True)
+    plt.text(0.9, 0.15, 'Watermark Text', fontsize=12, color='red', ha='right', va='bottom', alpha=0.7)
+    plt.savefig(f'static/histogram_with_watermark_{column_name}.png')
+    plt.close()
+
 
 @analyze_app.route('/analyze', methods=['POST', 'GET'])
 def analyze():
@@ -53,7 +77,6 @@ def analyze():
             if df.empty:
                 return render_template('error.html', error_message="Failed to load CSV file or DataFrame is empty")
 
-            print(df.info())  # Print information about DataFrame
             analysis_method = request.form.get('analysis_method')
 
             if analysis_method == 'descriptive':
@@ -63,6 +86,21 @@ def analyze():
                 if descriptive_option == 'summary_statistics':
                     summary_stats = summary_statistics(df, summary_option)
                     return render_template('summary_statistics.html', summary_stats=summary_stats)
+                
+                elif descriptive_option == 'data_visualization':
+                    visualization_option = request.form.get('data_visualization_option')
+                    if visualization_option == 'histograms':
+                        columns_to_visualize = ['MMLU avg', 'Training computation (petaFLOP)', 'Training dataset size']
+                        for column in columns_to_visualize:
+                            if column not in df.columns:
+                                return render_template('error.html', error_message=f"Invalid column name: {column}")
+                        
+                        year_data = df['Year'].values  # Convert Series to NumPy array
+                        column_data = df[columns_to_visualize].values.T  # Transpose to get each column as a row
+                        for data, column_name in zip(column_data, columns_to_visualize):
+                            create_histogram_with_watermark(year_data, data, column_name)
+
+                        return render_template('watermark_histogram.html')
 
             else:
                 return render_template('invalid_analysis_method.html')
