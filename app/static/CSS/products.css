@@ -27,10 +27,12 @@
     font-size: 18px;
 }
 
-.button-group button {
-    margin-right: 10px;
+
+.dropdown .dropbtn {
+    margin-right: 40px;
 }
 
-.button-group button:last-child {
+
+.dropdown .button-group button:last-child {
     margin-right: 0;
 }
