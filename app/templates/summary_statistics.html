@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Summary Statistics</h1>
+    {% if summary_stats is not none %}
+        {% if summary_stats.empty %}
+            <p>Summary statistics DataFrame is empty.</p>
+        {% else %}
+            {% if summary_option == 'standard_deviation' %}
+                <p>Standard Deviation:</p>
+                <ul>
+                    {% for column, std in summary_stats.items() %}
+                        <li>{{ column }}: {{ std }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <table border="1">
+                    <thead>
+                        <tr>
+                            {% for column in summary_stats.columns %}
+                                <th>{{ column }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for index, value in summary_stats.iterrows() %}
+                            <tr>
+                                <th>{{ index }}</th>
+                                {% for data in value %}
+                                    <td>{{ data }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        <p>No summary statistics available.</p>
+    {% endif %}
+</body>
+
+    <p>The mean, also known as the average, is a measure of central tendency in a set of numerical data.
+        It is calculated by adding up all the values in the dataset and then dividing the sum by the total number of values.</p>
+    <p>Another measure of central tendency is median, which represents the middle value of a dataset when it is sorted in ascending or descending order.
+        If the dataset has an odd number of values, the median is the middle value.
+        If the dataset has an even number of values, the median is the average of the two middle values.</p>
+    <p>Lambda (λ): In Python, lambda functions, also known as anonymous functions, are small, inline functions defined using the lambda keyword.
+        Lambda functions can take any number of arguments but can only have one expression.
+        They are commonly used in situations where a small function is needed for a short period of time and does not need to be named.</p>
+
+</html>
+

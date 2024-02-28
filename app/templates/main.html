@@ -36,7 +36,7 @@
                 <div id="analysis-left"></div>
                 <div id="analysis-right">
                     <div id="analysis">
-                        <h3>Data Growth with valuable insights using intuitive tools<h3>
+                        <h3>Data Growth with valuable insights using intuitive tools</h3>
                         <form action="/upload" method="post" enctype="multipart/form-data">
                             <label for="file">Choose a CSV file:</label>
                             <br>
@@ -52,9 +52,13 @@
                             <select name="analysis_method" id="analysis_method">
                                 <option value="none">Select Analysis Method</option>
                                 <option value="descriptive">Descriptive Analysis</option>
-                                <option value="custom">Custom Analysis</option>
-                                <option value="correlation">Correlation Heat Map Analysis</option>
-                                <option value="univariate">Univariate Analysis</option>
+                                <option value="inferential">Inferential Analysis</option>
+                                <option value="predictive">Predictive Analysis</option>
+                                <option value="prescriptive">Prescriptive Analysis</option>
+                                <option value="spatial">Spatial Analysis</option>
+                                <option value="text">Text Analysis</option>
+                                <option value="network">Network Analysis</option>
+                                <option value="big_data">Big Data Analysis</option>
                             </select>
                             <br><br>
                         
@@ -63,51 +67,96 @@
                                 <label for="descriptive_option">Select Descriptive Option:</label>
                                 <select name="descriptive_option" id="descriptive_option">
                                     <option value="none">Select Descriptive Option</option>
-                                    <option value="histogram">Histogram</option>
-                                    <option value="pie_chart">Pie Chart</option>
+                                    <option value="summary_statistics">Summary Statistics</option>
+                                    <option value="data_visualization">Data Visualization</option>
+                                    <option value="frequency_distributions">Frequency Distributions</option>
                                 </select>
                                 <br><br>
                         
-                                <!-- Nested dropdown for Histogram options -->
-                                <div id="histogram_options" style="display: none;">
-                                    <label for="histogram_type">Select Histogram Type:</label>
-                                    <select name="histogram_type" id="histogram_type">
-                                        <option value="none">Select Histogram Type</option>
-                                        <option value="customized_histogram_density_path">Customized Histogram Density</option>
-                                        <option value="waterline">Waterline Histogram</option>
-                                        <option value="stacked">Stacked Histogram</option>
+                                <!-- Nested dropdown for Summary Statistics options -->
+                                <div id="summary_statistics_options" style="display: none;">
+                                    <label for="summary_statistics_option">Select Summary Statistics Option:</label>
+                                    <select name="summary_statistics_option" id="summary_statistics_option">
+                                        <option value="none">Select Summary Statistics Option</option>
+                                        <option value="mean_median_mode">Mean, Median, Mode</option>
+                                        <option value="standard_deviation">Standard Deviation</option>
+                                        <!-- Add more options here -->
+                                    </select>
+                                    <br><br>
+                                </div>
+                        
+                                <!-- Nested dropdown for Data Visualization options -->
+                                <div id="data_visualization_options" style="display: none;">
+                                    <label for="data_visualization_option">Select Data Visualization Option:</label>
+                                    <select name="data_visualization_option" id="data_visualization_option">
+                                        <option value="none">Select Data Visualization Option</option>
+                                        <option value="histograms">Histograms</option>
+                                        <option value="box_plots">Box Plots</option>
+                                        <!-- Add more options here -->
+                                    </select>
+                                    <br><br>
+                                </div>
+                        
+                                <!-- Nested dropdown for Frequency Distributions options -->
+                                <div id="frequency_distributions_options" style="display: none;">
+                                    <label for="frequency_distributions_option">Select Frequency Distributions Option:</label>
+                                    <select name="frequency_distributions_option" id="frequency_distributions_option">
+                                        <option value="none">Select Frequency Distributions Option</option>
+                                        <option value="tables">Tables</option>
+                                        <option value="charts">Charts</option>
+                                        <!-- Add more options here -->
                                     </select>
                                     <br><br>
                                 </div>
                             </div>
                         
+                            <!-- Repeat the above structure for other analysis methods -->
+                            
                             <button type="submit">Submit</button>
                         
                             <script>
                                 document.getElementById("analysis_method").addEventListener("change", function() {
                                     var analysisMethod = this.value;
                                     var descriptiveOptions = document.getElementById("descriptive_options");
-                        
+                                    var inferentialOptions = document.getElementById("inferential_options");
+                                    // Add variables for other analysis method options
+                            
                                     if (analysisMethod === "descriptive") {
                                         descriptiveOptions.style.display = "block";
+                                        // Hide other analysis method options
                                     } else {
                                         descriptiveOptions.style.display = "none";
-                                        document.getElementById("histogram_options").style.display = "none";
+                                        // Show/hide other analysis method options accordingly
+                                    }
+                            
+                                    // Display nested options for Summary Statistics if selected
+                                    if (analysisMethod === "descriptive") {
+                                        var descriptiveOption = document.getElementById("descriptive_option").value;
+                                        if (descriptiveOption === "summary_statistics") {
+                                            document.getElementById("summary_statistics_options").style.display = "block";
+                                        } else {
+                                            document.getElementById("summary_statistics_options").style.display = "none";
+                                        }
+                                    } else {
+                                        document.getElementById("summary_statistics_options").style.display = "none";
                                     }
                                 });
-                        
+                            
+                                // Show/hide nested options for Summary Statistics based on descriptive option selected
                                 document.getElementById("descriptive_option").addEventListener("change", function() {
                                     var descriptiveOption = this.value;
-                                    var histogramOptions = document.getElementById("histogram_options");
-                        
-                                    if (descriptiveOption === "histogram") {
-                                        histogramOptions.style.display = "block";
+                                    if (descriptiveOption === "summary_statistics") {
+                                        document.getElementById("summary_statistics_options").style.display = "block";
                                     } else {
-                                        histogramOptions.style.display = "none";
+                                        document.getElementById("summary_statistics_options").style.display = "none";
                                     }
                                 });
                             </script>
-                        </form>                        
+                            
+                            
+                        </form>
+                        
+                                             
                     
                         {% block content %}{% endblock %}
                     </div>
