@@ -3,13 +3,23 @@
     <head>
         <title>Data Analytic</title>
         <link rel="stylesheet" href="{{ url_for('static', filename="CSS/main.css") }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename="CSS/products.css") }}">
+        <script src=""{{ url_for('static', filename='scripts/products.js') }}""></script>
+        <script src="/static/scripts/products.js"></script>
     </head>
     <body class='container'>
         <div class="analytic-container">
             <div id="button-container">
                 <h2>DA Data Analytic</h2>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleDropdown('productsDropdown')">Products</button>
+                    <div class="dropdown-content" id="productsDropdown">
+                        <a href="#">Data Cleaning</a>
+                        <a href="#">Product 2</a>
+                        <a href="#">Product 3</a>
+                    </div>
+                </div>
                 <div>
-                    <p>Products</p>
                     <p>Analytic</p>
                     <p>More</p>
                 </div>
@@ -18,6 +28,7 @@
                     <p>Get Started</p>
                 </div>    
             </div>
+            
 
             <div id="body-container">
                 <h2>Unlock Powerful Insights with Data Analytics</h2>
@@ -116,17 +127,13 @@
                                     var analysisMethod = this.value;
                                     var descriptiveOptions = document.getElementById("descriptive_options");
                                     var inferentialOptions = document.getElementById("inferential_options");
-                                    // Add variables for other analysis method options
                             
                                     if (analysisMethod === "descriptive") {
                                         descriptiveOptions.style.display = "block";
-                                        // Hide other analysis method options
                                     } else {
                                         descriptiveOptions.style.display = "none";
-                                        // Show/hide other analysis method options accordingly
                                     }
-                            
-                                    // Display nested options for Summary Statistics if selected
+
                                     if (analysisMethod === "descriptive") {
                                         var descriptiveOption = document.getElementById("descriptive_option").value;
                                         if (descriptiveOption === "summary_statistics") {
@@ -166,11 +173,8 @@
                                     } else {
                                         document.getElementById("data_visualization_options").style.display = "none";
                                     }
-                                });
+                                });                                
                             </script>
-                            
-                            
-                            
                         </form>
                         
                                              
