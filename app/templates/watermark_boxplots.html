@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watermark Box Plots</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+       
+        .boxplot h2 {
+            text-align: center;
+        }
+        .watermark-summary {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            text: 30px;
+        }
+        
+        .watermark-summary h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .watermark-summary p {
+            margin-bottom: 10px;
+        }
+        
+        .watermark-summary strong {
+            color: #28a745;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Watermark Box Plots</h1>
+        
+        <!-- Display the box plots with watermark -->
+        <div class="boxplots">
+            <div class="boxplot">
+                <h2>MMLU avg</h2>
+                <img src="{{ url_for('static', filename='boxplot_with_watermark_MMLU avg.png') }}" alt="Box Plot MMLU avg">
+            </div>
+            <div class="boxplot">
+                <h2>Training computation (petaFLOP)</h2>
+                <img src="{{ url_for('static', filename='boxplot_with_watermark_Training computation (petaFLOP).png') }}" alt="Box Plot Training computation (petaFLOP)">
+            </div>
+            <div class="boxplot">
+                <h2>Training dataset size</h2>
+                <img src="{{ url_for('static', filename='boxplot_with_watermark_Training dataset size.png') }}" alt="Box Plot Training dataset size">
+            </div>
+        </div>
+
+        <div class="watermark-summary">
+            <h2>Understanding Box Plots</h2>
+            <p>
+                A box plot, also known as a box-and-whisker plot, is a graphical method to display the distribution of a dataset.
+                It summarizes the central tendency, dispersion, and skewness of the data.
+            </p>
+            <p>
+                <strong>Interpreting a Box Plot:</strong><br>
+                The box represents the interquartile range (IQR), which contains the middle 50% of the data.<br>
+                The whiskers extend from the box and represent the range of the data.<br>
+                Outliers are represented as individual points beyond the whiskers.<br>
+                The line inside the box represents the median of the data.<br>
+            </p>
+        </div>
+
+        <a href="/" class="back-button">Return to Home</a>
+    </div>
+</body>
+</html>

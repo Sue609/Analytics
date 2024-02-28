@@ -7,11 +7,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
+import plotly.graph_objects as go
 
 
 analyze_app = Blueprint('analyze', __name__, template_folder='templates')
-import pandas as pd
-
 
 def summary_statistics(df, summary_option):
     """
@@ -37,6 +36,30 @@ def summary_statistics(df, summary_option):
         result = pd.DataFrame()
     return result
 
+
+def create_boxplot_with_watermark(df, columns_data, column_names):
+    """
+    Function to create box plots with watermark for specified columns in a DataFrame.
+
+    Parameters:
+    df (DataFrame): The input DataFrame.
+    columns_data (list): List of numpy arrays containing the data for each column to visualize.
+    column_names (list): List of column names to be used for labeling.
+
+    Returns:
+    None
+    """
+    num_columns = len(columns_data)
+
+    for i in range(num_columns):
+        plt.figure(figsize=(10, 6))
+        plt.boxplot(columns_data[i], vert=False)
+        plt.title(f'Box Plot of {column_names[i]}')
+        plt.xlabel(column_names[i])
+        plt.grid(True)
+        plt.text(0.9, 0.15, 'Watermark Text', fontsize=12, color='red', ha='right', va='bottom', alpha=0.7)
+        plt.savefig(f'static/boxplot_with_watermark_{column_names[i]}.png')
+        plt.close()
 
 
 def create_histogram_with_watermark(year_data, column_data, column_name):
@@ -101,6 +124,18 @@ def analyze():
                             create_histogram_with_watermark(year_data, data, column_name)
 
                         return render_template('watermark_histogram.html')
+                    
+                    elif visualization_option == 'box_plots':
+                        columns_to_visualize = ['MMLU avg', 'Training computation (petaFLOP)', 'Training dataset size']
+                        for column in columns_to_visualize:
+                            if column not in df.columns:
+                                return render_template('error.html', error_message=f"Invalid column name: {column}")
+                        
+                        column_data = df[columns_to_visualize].values.T  # Transpose to get each column as a row
+                        create_boxplot_with_watermark(df, column_data, columns_to_visualize)
+
+                        return render_template('watermark_boxplots.html')
+
 
             else:
                 return render_template('invalid_analysis_method.html')
