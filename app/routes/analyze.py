@@ -30,10 +30,12 @@ def summary_statistics(df, summary_option):
     if summary_option == 'mean_median_mode':
         result = df[['Year', 'MMLU avg', 'Training computation (petaFLOP)', 'Training dataset size']].agg(['mean', 'median', lambda x: x.mode().iloc[0]])
     elif summary_option == 'standard_deviation':
-        result = df[['Year', 'MMLU avg', 'Training computation (petaFLOP)', 'Training dataset size']].std()
+        result = df[['Year', 'MMLU avg', 'Training computation (petaFLOP)', 'Training dataset size']].std().to_frame().T
+        result.index = ['Standard Deviation']
     else:
-        result = None  # Handle other cases
+        result = pd.DataFrame()
     return result
+
 
 
 
