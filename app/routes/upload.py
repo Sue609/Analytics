@@ -41,7 +41,7 @@ def upload():
         upload_folder = current_app.config['UPLOAD_FOLDER']
         os.makedirs(upload_folder, exist_ok=True)
         
-        filename = secure_filename('file.csv')
+        filename = secure_filename('data_cleaning_files.csv')
 
         filepath = os.path.join(upload_folder, filename)
         file.save(filepath)

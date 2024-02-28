@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Data</title>
+</head>
+<body>
+    <h1>Clean Data</h1>
+    <form action="{{ url_for('clean_data_app.clean_data') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv"><br><br>
+        <input type="submit" value="Upload and Clean Data">
+    </form>
+
+    {% if cleaned_data %}
+    <h2>Uploaded and Cleaned Data</h2>
+    <textarea rows="10" cols="50" readonly>{{ cleaned_data }}</textarea><br>
+    <a href="{{ filename }}" download>Download Cleaned Data</a>
+    {% endif %}
+    <a href="/">Return to Home</a>
+</body>
+</html>
