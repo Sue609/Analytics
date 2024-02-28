@@ -1,37 +1,44 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analysis Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/descriptive.css') }}">
+    <title>Descriptive Analysis Results</title>
+    <!-- Add any necessary CSS or external libraries here -->
 </head>
 <body>
-    <h1>Analysis Result</h1>
-    <div>
-        {% if result is string %}
-            <p>{{ result }}</p>
-        {% elif result is defined %}
-            {% if result.empty %}
-                <p>No data available for analysis.</p>
-            {% else %}
-                {{ result.to_html()|safe }}
-            {% endif %}
-        {% else %}
-            <p>Invalid result type.</p>
-        {% endif %}
-    </div>
+    <h1>Descriptive Analysis Results</h1>
 
-    <div>
-        <h2>Generated Visualizations</h2>
-        <div class="image-container">
-            <h3>Custom Analysis Plot</h3>
-            <img src="{{ url_for('static', filename='box_plot_level.png') }}" alt="Custom Analysis Plot">
-        </div>
-        <div class="image-container">
-            <h3>Describe Analysis Plot</h3>
-            <img src="{{ url_for('static', filename='histogram_level.png') }}" alt="Describe Analysis Plot">
-        </div>
-    </div>
+    <!-- Display the histogram plot -->
+    {% if plot_path %}
+        <h2>Histogram Plot</h2>
+        <img src="{{ url_for('static', filename=plot_path) }}" alt="Histogram">
+    {% endif %}
+
+    <!-- Display summary statistics -->
+    {% if summary_statistics %}
+        <h2>Summary Statistics</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Statistic</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in summary_statistics.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <!-- Add a link/button to navigate back or perform another analysis if needed -->
+    <a href="/">Back to Home</a>
+
+    <!-- Add any additional content or scripts as needed -->
 </body>
 </html>

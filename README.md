@@ -30,6 +30,14 @@ Types of analysis conducted:
 
         4. Correlation Scatter plot:
                 # This is a statistical method used to measure the strength of the linear relationship between two variablesand compute their association. It calculates the level of change in one variable due to the change in the other. Correlation between two variables can be either a positive correlation, a negative correlation, or no correlation.
+                A correlation heatmap is a graphical tool that displays the correlation between multiple variables as a color-coded matrix. It’s like a color chart 🌈 that shows us how closely related different variables are.
+
+                In a correlation heatmap, each variable is represented by a row and a column, and the cells show the correlation between them. The color of each cell represents the strength and direction of the correlation, with darker colors indicating stronger correlations.
+
+                        - Look at the color of each cell to see the strength and direction of the correlation.
+                        - Darker colors indicate stronger correlations, while lighter colors indicate weaker correlations.
+                        - Positive correlations (when one variable increases, the other variable tends to increase) are usually represented by warm colors, such as red or orange.
+                        - Negative correlations (when one variable increases, the other variable tends to decrease) are usually represented by cool colors, such as blue or green.
 
         5.  Univariate Analysis:
                 # It focuses on understanding the behavior and trend of a single variable (the "Value" variable) over time.
