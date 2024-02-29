@@ -135,7 +135,8 @@ def analyze():
                         create_boxplot_with_watermark(df, column_data, columns_to_visualize)
 
                         return render_template('watermark_boxplots.html')
-
+                elif descriptive_option == 'data_visualization':
+                    pass
 
             else:
                 return render_template('invalid_analysis_method.html')
