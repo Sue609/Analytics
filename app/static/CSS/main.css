@@ -18,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #455386;
+    background-color: #b8c3e9;
     color: white;
     padding: 10px 20px;
 }
@@ -127,7 +127,7 @@ button[type="submit"]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh; /* Adjust the height as needed */
+    height: 50vh;
 }
 
 .about-content {
@@ -173,7 +173,6 @@ button[type="submit"]:hover {
     margin-bottom: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
-
 }
 
 .testimony p {
