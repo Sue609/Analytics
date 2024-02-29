@@ -56,10 +56,11 @@
 
     {% if cleaned_data %}
     <h2>Uploaded and Cleaned Data</h2>
-    <textarea readonly>{{ cleaned_data }}</textarea><br>
-    <a href="{{ filename }}" download class="download-button">Download Cleaned Data</a> <!-- Download button -->
+    {{ cleaned_data | safe }} <!-- Render the HTML table -->
+    <a href="{{ filename }}" download class="download-button">Download Cleaned Data</a>
     {% endif %}
 
     <a href="/" class="return-link">Return to Home</a> <!-- Return to Home link -->
 </body>
 </html>
+
