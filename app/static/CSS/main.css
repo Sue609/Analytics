@@ -71,17 +71,27 @@
 #analysis-right {
     flex: 1;
     padding: 20px;
+
 }
 
 #analysis {
     max-width: 1000px;
-    margin: 50px 50px 50px auto;
+    max-height: 100%;
+    margin: 50px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.analysis-options {
+    margin-top: 20px;
+}
+
+.analysis-options h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
 
 form {
     margin-bottom: 20px;
@@ -100,7 +110,7 @@ select {
 }
 
 button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -109,10 +119,68 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #72a6dd;
 }
 
-h1 {
+
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Adjust the height as needed */
+}
+
+.about-content {
+    max-width: 1300px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-content h1 {
     font-size: 24px;
     margin-bottom: 20px;
+}
+
+.about-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.testimonies-container {
+    background-color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.testimonies {
+    display: flex;
+    justify-content: space-between;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.testimony {
+    flex-basis: calc(50% - 20px);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(27, 27, 27, 0.1);
+    height: 300px;
+    width: 250px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+}
+
+.testimony p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.testimony p:last-child {
+    margin-bottom: 0;
 }

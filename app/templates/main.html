@@ -15,8 +15,8 @@
                     <button class="dropbtn" onclick="toggleDropdown('productsDropdown')">Products</button>
                     <div class="dropdown-content" id="productsDropdown">
                         <a href="{{ url_for('clean_data_app.handle_clean_data') }}">Data Cleaning</a>                        
-                        <a href="#">Product 2</a>
-                        <a href="#">Product 3</a>
+                        <a href="#">Descriptive Analysis</a>
+                        <a href="#">Text Analysis</a>
                     </div class="button-group">
                         <button class="dropbtn">Analytic</button>
                         <button class="dropbtn">More</button>
@@ -116,7 +116,6 @@
                                 </div>
                             </div>
                         
-                            <!-- Repeat the above structure for other analysis methods -->
                             
                             <button type="submit">Submit</button>
                         
@@ -182,10 +181,35 @@
                 </div>
             </div>
         </div>
+        <div class="about-container">
+            <div class="about-content">
+                <h1>About AnalytiCraft</h1>
+                <p>Our website analytics platform empowers you to gain valuable insights into your website's performance, user behavior, and more. Whether you're a business owner, marketer, or website developer, our intuitive tools and comprehensive analytics dashboards provide the data you need to make informed decisions and optimize your online presence.</p>
+            </div>
+        </div>
+    
+        <!-- User Testimonies Section -->
+        <div class="testimonies-container">
+            <div class="testimonies">
+                <div class="testimony">
+                    <h2>Join our global community </h2>
+                    <img src="static/CSS/image2.jpg" alt="Description of your image" style="width: 180px;">
+                    <p style="font-size: 18px;">Take your online presence to the next level.
+                        Connect with like-minded individuals, share experiences, and stay updated with the latest trends in website analytics and optimization.</p>
+                </div>
+                <div class="testimony">
+                    <img src="static/CSS/image1.jpg" alt="Description of your image" style="width: 180px;">
+                    <p style="font-size: 18px;">Easy-to-use interface</p>
+                    <p style="font-size: 18px;">Real-time data tracking</p>
+                    <p style="font-size: 18px;">Customizable analytics reports</p>
+                </div>
+                <div class="testimony">
+                    <h2>A home for Everyone</h2>
+                    <img src="static/CSS/image3.jpg" alt="Description of your image" style="width: 200px;">
+                    <p style="font-size: 18px;">Join our community of 10,000+ users on social media</p>
+                    <pstyle="font-size: 18px;">Follow us for updates and insights</p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
-
-<p>Our website analytics platform empowers you to gain valuable insights into your website's performance, user behavior, and more.
-    Whether you're a business owner, marketer, or website developer, our intuitive tools and comprehensive analytics
-    dashboards provide the data you need to make informed decisions and optimize your online presence.
-</p>
