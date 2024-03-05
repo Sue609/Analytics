@@ -46,3 +46,8 @@ Types of analysis conducted:
 
 Creating Matplotlin Histogram:
         1. Create a bin of the ranges, then distribute the whole range of the values into a series ot intervals, and count the values that fall into each interval. Bins are identified as consecutive, non-overlapping intervals of variables.
+
+Inferential Statistics:
+        Inferential statistics are often used to compare the differences between the treatment groups. Inferential statistics use measurements from the sample of subjects in the experiment to compare the treatment groups and make generalizations about the larger population of subjects.
+         It allows you to draw conclusions based on extrapolations, and is in that way fundamentally different from descriptive statistics that merely summarize the data that has actually been measured. Let us go back to our party example.
+
