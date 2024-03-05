@@ -49,5 +49,16 @@ Creating Matplotlin Histogram:
 
 Inferential Statistics:
         Inferential statistics are often used to compare the differences between the treatment groups. Inferential statistics use measurements from the sample of subjects in the experiment to compare the treatment groups and make generalizations about the larger population of subjects.
-         It allows you to draw conclusions based on extrapolations, and is in that way fundamentally different from descriptive statistics that merely summarize the data that has actually been measured. Let us go back to our party example.
+         It allows you to draw conclusions based on extrapolations, and is in that way fundamentally different from descriptive statistics that merely summarize the data that has actually been measured.
 
+Data cleaning is an essential step in the data preprocessing pipeline for any data science or analytics project. Messy, inconsistent, or missing data can lead to inaccurate insights and model predictions.
+Data Cleaning Techniques with Python:
+        - Handling Missing Values
+        - Remove unnecessary values.
+        - Remove duplicate data.
+        - Avoid typos.
+        - Convert data types.
+        - Search for missing values.
+        - Use a clear format.
+        - Translate language.
+        - Remove unwanted outliers.
